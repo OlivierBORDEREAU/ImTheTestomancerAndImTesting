@@ -4,6 +4,8 @@
 
 Testomancer is a specialized skill designed for [Opencode](https://github.com/anomalyco/opencode) that transforms any AI agent into a senior software testing expert. It provides structured guidance on testing strategy, implementation best practices, and actionable recommendations across all testing levels.
 
+> **Foundations:** Testomancer is built on ISTQB testing principles and terminology (Component Testing, Integration Testing, System Testing, etc.) combined with modern AI agent practices. Test generation strictly follows Karpathy agent guidelines: **state assumptions clearly**, **define verifiable success criteria first**, **keep changes surgical and minimal**, **use a test-first mindset**, and **verify thoroughly before moving forward**.
+
 ## What It Does
 
 Testomancer analyzes your codebase and delivers testing recommendations:
@@ -50,12 +52,12 @@ Testomancer analyzes your codebase and delivers testing recommendations:
 
 ## Covered Testing Levels (ISTQB-Aligned)
 
-| Level | ISTQB Mapping | Description |
+| Level | ISTQB Term | Description |
 |-------|---------------|-------------|
-| **Unit Tests** | Component Testing | Test individual functions, methods, and classes in isolation |
-| **Integration Tests** | Component Integration Testing | Verify interactions between modules and external services |
-| **Functional Tests** | System Testing | Validate business requirements and user stories |
-| **End-to-End Tests** | Acceptance Testing | Test complete user flows from start to finish |
+| **Unit Tests** | Component Testing | Individual functions, methods, and classes in isolation |
+| **Integration Tests** | Integration Testing | Interactions between modules, components, and external services |
+| **Functional Tests** | System Testing (functional) | Validation of business requirements and user stories |
+| **End-to-End Tests** | End-to-End / Acceptance Testing | Complete user journeys and full system behavior |
 
 ## Installation
 
@@ -151,10 +153,23 @@ Testomancer aligns with the **ISTQB 7 Testing Principles**:
 5. **Beware of the pesticide paradox** — tests must evolve
 6. **Testing is context-dependent** — choose the right level
 7. **Absence of errors is a fallacy** — verify requirements
+8. **Risk-based testing** — focus resources on highest-risk areas first
 
 > **Test Process (ISTQB):** Planning → Analysis → Implementation → Evaluation → Closure
 
 Testomancer guides you through this lifecycle at every level.
+
+---
+
+## Philosophy / Standards & Guidelines
+
+Testomancer combines three foundational frameworks:
+
+1. **ISTQB Framework** — Testing levels (Component → Integration → System → Acceptance), test process (Planning → Analysis → Implementation → Evaluation → Closure), and 7 core principles
+2. **Testing Pyramid** — 70% Unit / 20% Integration / 10% E2E distribution focused on speed and isolation
+3. **Karpathy Agent Guidelines** — State assumptions clearly, define success criteria first, keep changes surgical, verify thoroughly
+
+> These frameworks work together: ISTQB provides terminology and process, the Pyramid guides test distribution, and Karpathy rules govern AI behavior during test generation.
 
 ### AI Behavior (Karpathy-Style)
 
@@ -179,16 +194,16 @@ The skill incorporates **Karpathy-style agent guidelines** for test generation:
 testomancer/
 ├── SKILL.md              # Main skill definition
 └── references/
-    ├── unit_tests.md         # Unit testing (Component Testing ISTQB)
-    ├── integration_tests.md  # Integration testing (Component Integration ISTQB)
-    ├── functional_tests.md     # Functional/System testing (ISTQB)
-    ├── e2e_tests.md         # End-to-End testing (Acceptance ISTQB)
-    ├── best_practices.md     # Cross-language best practices audit
-    ├── specific_rules.md    # Project-specific overrides
-    └── karpathy-guidelines.md # Karpathy-style test generation
+    ├── [unit_tests.md]         # Unit testing (Component Testing ISTQB)
+    ├── [integration_tests.md]  # Integration testing (Component Integration ISTQB)
+    ├── [functional_tests.md]     # Functional/System testing (ISTQB)
+    ├── [e2e_tests.md]         # End-to-End testing (Acceptance ISTQB)
+    ├── [best_practices.md]     # Cross-language best practices audit
+    ├── [specific_rules.md]    # Project-specific overrides
+    └── [karpathy-guidelines.md] # Karpathy-style test generation
 ```
 
-> **Quick Navigation:** Each reference file includes level-specific guidance, ISTQB mapping, Karpathy rules, and prompt templates.
+> **Quick Navigation:** Click any reference file above for level-specific guidance, ISTQB mapping, Karpathy rules, and prompt templates.
 
 ## Compliance & Guidelines
 
@@ -200,7 +215,11 @@ Testomancer aligns with industry standards:
 
 ## Contributing
 
-Contributions welcome! Please read the references in the `references/` folder for guidelines.
+Contributions welcome!
+
+- For project-specific rules, see [`specific_rules.md`](testomancer/references/specific_rules.md)
+- For detailed testing guidance, see files in [`references/`](testomancer/references/) folder
+- Follow the Karpathy Guidelines when adding test code
 
 ## Roadmap
 
