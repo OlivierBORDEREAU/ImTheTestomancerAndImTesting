@@ -1,7 +1,7 @@
 # End-to-End Tests – Testomancer
 
 > **ISTQB Mapping:** E2E is a test technique/approach, not a formal level. It corresponds to **System Testing** or **Acceptance Testing** when focusing on complete user journeys. ISTQB recommends risk-based selection—keep E2E minimal (5-10% of total tests).
-> **Karpathy Guidelines:** Generate the minimal set of E2E tests needed for critical paths. Prefer simple, readable Playwright scripts over complex page objects unless the project already uses them.
+> **Karpathy Guidelines:** Generate the minimal set of E2E tests needed for critical paths. Prefer Playwright codegen + surgical edits over complex page objects unless the project already uses them. Keep scripts simple and readable.
 
 **Definition**  
 Tests that simulate a real user journey through the entire application (UI + backend + database).
@@ -69,6 +69,7 @@ test('checkout accessible', async ({ page }) => {
 
 | Strategy | Implementation |
 |----------|---------------|
+| **Goal-Driven** | Explicitly state the user journey goal + assumptions at the top of every E2E test |
 | **Stable locators** | `get_by_role`, `get_by_label`, not CSS/XPath |
 | **Auto-wait** | Use Playwright (built-in) or explicit waits |
 | **Network stubs** | Mock external APIs (`page.route()`) |

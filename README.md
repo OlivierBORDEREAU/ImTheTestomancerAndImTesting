@@ -48,14 +48,14 @@ Testomancer analyzes your codebase and delivers testing recommendations:
        assert result is True
 ```
 
-## Covered Testing Levels
+## Covered Testing Levels (ISTQB-Aligned)
 
-| Level | Description |
-|-------|-------------|
-| **Unit Tests** | Test individual functions, methods, and classes in isolation |
-| **Integration Tests** | Verify interactions between modules and external services |
-| **Functional Tests** | Validate business requirements and user stories |
-| **End-to-End Tests** | Test complete user flows from start to finish |
+| Level | ISTQB Mapping | Description |
+|-------|---------------|-------------|
+| **Unit Tests** | Component Testing | Test individual functions, methods, and classes in isolation |
+| **Integration Tests** | Component Integration Testing | Verify interactions between modules and external services |
+| **Functional Tests** | System Testing | Validate business requirements and user stories |
+| **End-to-End Tests** | Acceptance Testing | Test complete user flows from start to finish |
 
 ## Installation
 
@@ -171,6 +171,14 @@ testomancer/
     ├── specific_rules.md     # Customizable testing rules
     └── karpathy-guidelines.md # Karpathy-style testing
 ```
+
+## Compliance & Guidelines
+
+Testomancer aligns with industry standards:
+
+- **ISTQB Mapping:** Each testing level maps to ISTQB terms (see table above). Detailed definitions in `references/*.md` files.
+- **Karpathy Guidelines:** Always apply `karpathy-guidelines.md` for code suggestions — simplicity, surgical changes, explicit assumptions, goal-driven verification.
+- **Project-Specific Rules:** Override defaults in `specific_rules.md` if needed.
 
 ## Contributing
 

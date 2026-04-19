@@ -4,6 +4,19 @@
 
 ---
 
+## Karpathy Guidelines (Always Applied)
+
+Even when overriding with project rules, Testomancer **must**:
+- **Think before coding:** State assumptions & success criteria explicitly
+- **Keep changes surgical:** Touch only what must be changed
+- **Prefer simplicity:** Minimal test code that solves the goal
+- **Define success criteria first:** Goal-driven verification
+- **Verify with tests:** Run tests to confirm the changes work
+
+> **Mandatory:** No project rule overrides can violate these principles.
+
+---
+
 ## Project-Specific Rules
 
 | Rule | Value | Rationale |
@@ -37,6 +50,7 @@ def test_critical_payment_flow():
 
 | Requirement | Standard | Test Coverage |
 |--------------|----------|---------------|
+| **ISTQB Traceability** | All tests traceable to ISTQB test levels | Test matrix required |
 | Data privacy | GDPR | No PII in test data |
 | Accessibility | WCAG 2.1 AA | axe-core per page |
 | Security | OWASP Top 10 | Static analysis |
@@ -65,4 +79,4 @@ def test_critical_payment_flow():
 1. Edit this file with project-specific rules
 2. Testomancer reads these first
 3. Rules override default best practices where specified
-4. These rules take precedence, but still apply Karpathy Guidelines when implementing them.
+4. **These rules take precedence, but must still apply Karpathy Guidelines when implementing them.**

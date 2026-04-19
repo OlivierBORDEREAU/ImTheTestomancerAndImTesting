@@ -1,7 +1,7 @@
 # Unit Tests – Testomancer
 
-> **ISTQB Note:** Also known as **Component Testing** in ISTQB terminology.
-> **Karpathy Guidelines:** All generated unit test code must strictly follow `karpathy-guidelines.md` — keep tests simple, surgical, readable. Include a verification plan (explicit assumption → goal → tradeoff).
+> **ISTQB Mapping:** Aligns with **Component Testing** in ISTQB terminology.
+> **Karpathy Guidelines:** All generated unit test code must strictly follow `karpathy-guidelines.md` — keep tests minimal and surgical. One assertion per test where possible. Define success criteria before writing any test code.
 
 **Definition**  
 Tests that verify a single unit of code (function, method, or class) in complete isolation.
@@ -88,11 +88,13 @@ property('sort integers', integer(0, 100).array(), (arr) => {
 - Pre-commit hooks + Husky (for JS/TS)  
 - Automatic coverage reports + badges
 
-**Prompt Template to Use** (always add Karpathy Guidelines note)
+**Prompt Template to Use** (Karpathy-enforced)
+
+Follow Karpathy: think step-by-step, keep changes surgical, verify success criteria first.
 
 Input:
 ```
-"Analyze this module [paste code]. Generate a complete unit test suite using [framework]. Cover nominal cases, edge cases, error cases, and property-based tests where applicable. Generate the tests following Karpathy Guidelines: simplicity first, surgical changes only, and include verification steps."
+"Analyze this module [paste code]. Generate unit tests using [framework]. Cover nominal cases, edge cases, error cases, and property-based tests where applicable. Follow Karpathy: simplicity first, surgical changes only, and include verification steps."
 ```
 
 Example Input:
@@ -133,8 +135,9 @@ def test_factorial_property(n):
     assert factorial(n) == factorial(n - 1) * n
 ```
 
-**Best Practices**  
+**Best Practices** (Karpathy-enforced)
 
+- **State test goal + assumptions explicitly** before each test suite (Karpathy goal-driven)
 - **Prefer minimal, clear tests (10 lines instead of 50)** — avoid over-engineering
 - **State assumptions explicitly** (e.g., "Assuming `UserRepository` is mocked")
 - One assertion per test when possible

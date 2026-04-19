@@ -1,7 +1,7 @@
 # Integration Tests – Testomancer
 
-> **ISTQB Note:** Also known as **Component Integration Testing** in ISTQB terminology.
-> **Karpathy Guidelines:** All suggested integration test code must follow `karpathy-guidelines.md` — prefer simple contract tests over complex setups unless needed.
+> **ISTQB Mapping:** Aligns with **Component Integration Testing** / **System Integration Testing** in ISTQB.
+> **Karpathy Guidelines:** Use Testcontainers or in-memory DBs for surgical, isolated tests. Avoid over-mocking; only mock what is strictly necessary.
 
 **Definition**  
 Tests that verify interactions between multiple units (database, internal APIs, services, message queues, etc.).
@@ -51,13 +51,13 @@ Look for: HTTP calls, repositories, services, event handlers, database connectio
 - Verify provider satisfies contract
 - Use Pact broker for CI/CD integration
 
-**Recommended Stack (2026)**
+**Recommended Stack (2026)** (Karpathy-simplicity aligned)
 
-| Language | Main Framework | Container Support | Mock/Stub | Notes |
-|----------|-------------|---------------|---------------|-----------|-------|
-| Python | pytest | Testcontainers (Python) | pytest-mock, responses | pytest-docker deprecated |
-| JavaScript/TypeScript | Vitest | Testcontainers (JS) | MSW, Supertest | MSW for HTTP mocking |
-| Java | JUnit 5 | Testcontainers Java 2.x | WireMock, MockMvc | 2.x: better startup |
+| Language | Main Framework | Container Support | Mock/Stub | Why Karpathy-simplicity |
+|----------|-------------|---------------|---------------|-------------------|
+| Python | pytest | Testcontainers (Python) | pytest-mock, responses | Ephemeral, no manual cleanup needed |
+| JavaScript/TypeScript | Vitest | Testcontainers (JS) | MSW, Supertest | In-memory, fast startup |
+| Java | JUnit 5 | Testcontainers Java 2.x | WireMock, MockMvc | Automatic cleanup via Ryuk |
 
 
 **Testcontainers 2.x Features**
@@ -97,10 +97,11 @@ Best practices:
 - Docker Compose for test environments  
 - CI/CD with container spin-up (Testcontainers + GitHub Actions)
 
-**Best Practices**
+**Best Practices** (Karpathy-enforced)
 
+- **Test contracts, not implementations** — simplicity & surgical principle
 - **Use in-memory databases or ephemeral containers** — avoid premature complexity; keep tests focused on the interaction being verified
-- **Test contracts, not implementations**
+- **Only mock what's strictly necessary** — avoid over-mocking
 - Systematic cleanup of test data
 
 **Prompt Template to Use**

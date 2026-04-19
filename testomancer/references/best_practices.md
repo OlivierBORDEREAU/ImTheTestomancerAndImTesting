@@ -1,10 +1,24 @@
 # Best Practices Compliance Checks – Testomancer
 
 > **External Standards:** This file aligns with [ISTQB](https://www.istqb.org/) testing best practices and the [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/) for security-related tests.
+> **ISTQB Note:** These practices support ISTQB principles of isolation, determinism, and traceability across all test levels.
+
+> **Karpathy Guidelines Integration:** All best-practice audits must follow Karpathy: surgical fixes only, simplicity first, state assumptions before suggesting changes.
 
 Before recommending tests, audit the codebase against modern language-specific standards (2026).
 Highlight violations with examples and suggest fixes.
-Overarching Principle: Follow Karpathy Guidelines for all test code suggestions.
+
+---
+
+## Universal Best Practices (Testing Pyramid)
+
+| Level | Ratio | Target | Notes |
+|-------|-------|--------|-------|
+| Unit Tests | ~70% | >80% coverage on critical paths | Fast, isolated |
+| Integration Tests | ~20% | Critical interactions | Medium speed |
+| E2E Tests | ~10% | Critical journeys only | Slower, use sparingly |
+
+> **Key Rule:** Target >80% statement/branch coverage on critical code paths. Keep tests deterministic and isolated.
 
 ---
 
@@ -114,6 +128,29 @@ function UserForm() {
 ```
 
 **Fix Suggestion:** Add proper interfaces, use userEvent in tests, extract custom hooks.
+
+**Complete Test Example:**
+```tsx
+// components/UserForm.test.tsx
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { UserForm } from './UserForm';
+
+test('submits form with user data', async () => {
+  const user = userEvent.setup();
+  const handleSubmit = vi.fn();
+
+  render(<UserForm onSubmit={handleSubmit} />);
+  await user.type(screen.getByLabelText(/email/i), 'test@example.com');
+  await user.type(screen.getByLabelText(/password/i), 'password123');
+  await user.click(screen.getByRole('button', { name: /submit/i }));
+
+  expect(handleSubmit).toHaveBeenCalledWith({
+    email: 'test@example.com',
+    password: 'password123',
+  });
+});
+```
 
 ---
 

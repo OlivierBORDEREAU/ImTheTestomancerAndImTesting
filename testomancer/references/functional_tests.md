@@ -1,7 +1,7 @@
 # Functional / System Tests – Testomancer
 
 > **ISTQB Mapping:** This level aligns with **System Testing** (ISTQB). Functional testing is a test type, not a distinct level in ISTQB — it maps primarily to System Testing (functional aspects) or Acceptance Testing.
-> **Karpathy Guidelines:** Keep scenarios simple and surgical. Avoid over-specifying future behavior. Test what the user needs, not what they might want someday.
+> **Karpathy Guidelines:** Generate the minimal set of scenarios needed for the user story. Define success criteria (Given/When/Then) before writing any Gherkin. Keep scenarios simple and surgical. Test what the user needs, not what they might want someday.
 
 **Definition**  
 Black-box tests that validate the system against functional requirements (user stories / specifications).
@@ -54,9 +54,9 @@ Feature: User Login
 | Basic security headers | security headers scanner | Per endpoint |
 | Mobile responsiveness | Playwright mobile view | Per layout |
 
-> **Note:** Full non-functional testing (load, security, accessibility) belongs at the Acceptance level.
+> **Note:** Full non-functional testing (load, security, accessibility, performance) belongs at the **Acceptance level**, not System/Functional level.
 
-**Traceability**
+**Traceability** (goal-driven verification)
 
 | Test | User Story | Acceptance Criteria | Automated? |
 |------|------------|-----------------|------------|
@@ -66,7 +66,7 @@ Feature: User Login
 
 - Use tags (`@US-001`) to link tests to user stories
 - Generate test matrix from requirements tracker
-- Failed test → immediate requirement gap identification
+- **Failed test → immediate requirement gap** (goal-driven verification)
 
 **Recommended Stack (2026)**
 
