@@ -65,3 +65,4 @@ def test_critical_payment_flow():
 1. Edit this file with project-specific rules
 2. Testomancer reads these first
 3. Rules override default best practices where specified
+4. These rules take precedence, but still apply Karpathy Guidelines when implementing them.

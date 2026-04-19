@@ -1,6 +1,7 @@
 # End-to-End Tests – Testomancer
 
-> **ISTQB Mapping:** E2E is a test technique/approach, not a formal level. It maps to **System Testing** or **Acceptance Testing** when validating end-user journeys. ISTQB recommends risk-based selection—keep E2E minimal (5-10% of total tests).
+> **ISTQB Mapping:** E2E is a test technique/approach, not a formal level. It corresponds to **System Testing** or **Acceptance Testing** when focusing on complete user journeys. ISTQB recommends risk-based selection—keep E2E minimal (5-10% of total tests).
+> **Karpathy Guidelines:** Generate the minimal set of E2E tests needed for critical paths. Prefer simple, readable Playwright scripts over complex page objects unless the project already uses them.
 
 **Definition**  
 Tests that simulate a real user journey through the entire application (UI + backend + database).
@@ -75,6 +76,21 @@ test('checkout accessible', async ({ page }) => {
 | **Isolate data** | Unique test data per run |
 | **Screenshots on fail** | `trace: on-first-retry` |
 | **Retry-until CI** | Only for known-flaky (mark with `@flaky`) |
+
+**Verification Steps** (Goal-Driven Execution)
+
+- **Goal:** Explicitly state what user journey the test verifies
+- **Assumption:** What are you assuming about the app state?
+- **Tradeoff:** Any simplifications (e.g., mocking payments)?
+
+Example:
+```python
+def test_checkout_confirmation(page):
+    # Goal: Verify user sees confirmation after checkout
+    # Assumption: User logged in, cart has 1 item
+    # Tradeoff: Payment API mocked
+    ...
+```
 
 **Best Practices**  
 - Limit to 5-10% of total tests  

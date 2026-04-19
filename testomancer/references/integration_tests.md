@@ -1,6 +1,7 @@
 # Integration Tests – Testomancer
 
 > **ISTQB Note:** Also known as **Component Integration Testing** in ISTQB terminology.
+> **Karpathy Guidelines:** All suggested integration test code must follow `karpathy-guidelines.md` — prefer simple contract tests over complex setups unless needed.
 
 **Definition**  
 Tests that verify interactions between multiple units (database, internal APIs, services, message queues, etc.).
@@ -96,7 +97,17 @@ Best practices:
 - Docker Compose for test environments  
 - CI/CD with container spin-up (Testcontainers + GitHub Actions)
 
-**Best Practices**  
-- Use in-memory databases or ephemeral containers  
-- Test contracts, not implementations  
+**Best Practices**
+
+- **Use in-memory databases or ephemeral containers** — avoid premature complexity; keep tests focused on the interaction being verified
+- **Test contracts, not implementations**
 - Systematic cleanup of test data
+
+**Prompt Template to Use**
+
+> Include a short verification plan (e.g., how to run and confirm the integration).
+
+Input:
+```
+"Analyze the API endpoints [paste code]. Generate integration tests to verify [specific interaction]. Include verification steps."
+```

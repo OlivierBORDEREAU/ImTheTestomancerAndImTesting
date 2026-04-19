@@ -1,6 +1,7 @@
 # Functional / System Tests – Testomancer
 
-> **ISTQB Mapping:** This level aligns with **System Testing** (ISTQB). Functional testing is a test type, not a distinct level in ISTQB — it's typically performed at System or Acceptance level. This guide treats it as shorthand for system-level functional testing.
+> **ISTQB Mapping:** This level aligns with **System Testing** (ISTQB). Functional testing is a test type, not a distinct level in ISTQB — it maps primarily to System Testing (functional aspects) or Acceptance Testing.
+> **Karpathy Guidelines:** Keep scenarios simple and surgical. Avoid over-specifying future behavior. Test what the user needs, not what they might want someday.
 
 **Definition**  
 Black-box tests that validate the system against functional requirements (user stories / specifications).
@@ -71,13 +72,13 @@ Feature: User Login
 
 | Type | Tool | Pros | Cons | Status |
 |------|------|------|------|--------|
-| **BDD** | Cucumber (Java/JS) | Widely adopted,Living docs | Verbose | Stable |
+| **BDD** | Cucumber (Java/JS) | Widely adopted, Living docs | Verbose | Stable |
 | | pytest-bdd (Python) | Pythonic integration | Less tooling | Stable |
 | | Behave (Python) | Simple Gherkin | Limited | Stable |
-| **UI Testing** | Playwright | Multi-browser, auto-wait | Newer | 2026 Leader |
-| | Playwright Component | React/Vue/Angular | In-context testing | 2026 Leader |
+| **UI Testing** | Playwright | Multi-browser, auto-wait, tracing | Newer | 2026 Leader |
+| | Playwright Component | React/Vue/Angular in-context | Growing ecosystem | 2026 Leader |
 | | Selenium | Mature ecosystem | Slow, flaky | Legacy |
-| **API Testing** | RestAssured 2026 | Fluent API, JSON path | Java only | Stable |
+| **API Testing** | RestAssured | Fluent API, JSON path | Java only | Stable |
 | | Supertest (JS) | Lightweight, Express | Limited validation | Stable |
 | | requests + pytest | Pythonic, flexible | Manual assertions | Stable |
 | **Contract** | Pact | CDC, broker integration | Setup overhead | Stable |

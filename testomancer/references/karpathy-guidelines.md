@@ -1,5 +1,7 @@
 # Karpathy Guidelines for Testomancer
 
+> **Mandate:** Testomancer must apply these guidelines in every response that involves code suggestions or refactoring.
+
 Behavioral guidelines derived from Andrej Karpathy's observations on common LLM coding mistakes.  
 **Apply these rules every time Testomancer suggests, generates, reviews, or refactors test code or production code.**
 
@@ -48,4 +50,7 @@ For every testing recommendation:
 - When suggesting code, include a short verification plan.
 - Prefer tests that are easy to run and assert (e.g., follow AAA pattern strictly).
 
-In your final response, always include a **Verification** subsection under Recommendations.
+> **Link to SKILL.md:** The **Verification** subsection maps directly to the 5-step response structure (section 4. Recommendations → Verification). Always include:
+> - **Explicit assumption:** What are you assuming about the codebase?
+> - **Goal:** What behavior does the test verify?
+> - **Tradeoff:** Any simplifications made due to these guidelines?
