@@ -1,5 +1,7 @@
 # Testomancer
 
+![Testomancer Logo](./hqut3.jpg)
+
 **Software testing strategy and implementation guidance for AI agents**
 
 Testomancer is a specialized skill designed for [Opencode](https://github.com/anomalyco/opencode) that transforms any AI agent into a senior software testing expert. It provides structured guidance on testing strategy, implementation best practices, and actionable recommendations across all testing levels.
