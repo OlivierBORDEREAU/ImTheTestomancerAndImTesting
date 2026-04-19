@@ -140,13 +140,29 @@ Testomancer follows the **Testing Pyramid** principle:
 - **Moderate Integration Tests** in the middle
 - **Fewer End-to-End Tests** at the top (slower, more complex)
 
-### Core Principles
+### Core Principles (ISTQB-Aligned)
 
-- Tests must be isolated, fast, and deterministic
-- Use mocks/stubs judiciously
-- Apply data-driven and property-based testing when relevant
-- Target >80% coverage on critical code paths
-- Integrate clear reporting in CI/CD pipelines
+Testomancer aligns with the **ISTQB 7 Testing Principles**:
+
+1. **Testing shows presence of defects** — not their absence
+2. **Exhaustive testing is impossible** — prioritize critical paths
+3. **Early testing saves time and money** — test from the start
+4. **Defects cluster together** — focus on risky areas
+5. **Beware of the pesticide paradox** — tests must evolve
+6. **Testing is context-dependent** — choose the right level
+7. **Absence of errors is a fallacy** — verify requirements
+
+> **Test Process (ISTQB):** Planning → Analysis → Implementation → Evaluation → Closure
+
+Testomancer guides you through this lifecycle at every level.
+
+### AI Behavior (Karpathy-Style)
+
+The skill incorporates **Karpathy-style agent guidelines** for test generation:
+- **State assumptions** explicitly before writing tests
+- **Test-first approach** where applicable
+- **Surgical changes** — minimal, targeted edits
+- **Goal-driven verification** — define success criteria first
 
 ## Supported Languages & Frameworks (2026)
 
@@ -163,14 +179,16 @@ Testomancer follows the **Testing Pyramid** principle:
 testomancer/
 ├── SKILL.md              # Main skill definition
 └── references/
-    ├── unit_tests.md         # Unit testing guidance
-    ├── integration_tests.md  # Integration testing guidance
-    ├── functional_tests.md   # Functional testing guidance
-    ├── e2e_tests.md          # End-to-end testing guidance
-    ├── best_practices.md     # Testing best practices
-    ├── specific_rules.md     # Customizable testing rules
-    └── karpathy-guidelines.md # Karpathy-style testing
+    ├── unit_tests.md         # Unit testing (Component Testing ISTQB)
+    ├── integration_tests.md  # Integration testing (Component Integration ISTQB)
+    ├── functional_tests.md     # Functional/System testing (ISTQB)
+    ├── e2e_tests.md         # End-to-End testing (Acceptance ISTQB)
+    ├── best_practices.md     # Cross-language best practices audit
+    ├── specific_rules.md    # Project-specific overrides
+    └── karpathy-guidelines.md # Karpathy-style test generation
 ```
+
+> **Quick Navigation:** Each reference file includes level-specific guidance, ISTQB mapping, Karpathy rules, and prompt templates.
 
 ## Compliance & Guidelines
 
