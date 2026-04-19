@@ -27,6 +27,8 @@ Testomancer analyzes your codebase and delivers comprehensive testing recommenda
 
 ## Installation
 
+> **Note:** Testomancer requires Opencode v0.5.0 or later. Run `opencode --version` to check your version.
+
 ### Option 1: Automatic Installation (Recommended)
 
 Copy the `testomancer` skill folder to your Opencode skills directory:
@@ -39,7 +41,7 @@ cp -r testomancer ~/.agents/skills/
 
 1. Clone or download this repository
 2. Copy the entire `testomancer` folder to:
-   ```
+   ```bash
    ~/.agents/skills/testomancer/
    ```
 3. Restart Opencode
@@ -63,6 +65,39 @@ When Testomancer is active, it will:
 3. Confirm the optimal testing level
 4. Provide prioritized recommendations with code examples
 5. Offer next steps for implementation
+
+### Quick Start
+
+```testomancer
+"How should I create unit tests for my Python authentication module?"
+```
+
+Expected Testomancer output:
+
+```
+1. Codebase Analysis
+   - Detected: Python with pytest
+   - Module: auth.py (authentication logic)
+
+2. Testing Level: Unit Tests
+   - Target: validate_credentials(), hash_password(), verify_token()
+   - Use pytest-mock for external dependencies
+
+3. Recommended Structure
+   tests/
+   ├── __init__.py
+   ├── conftest.py           # Shared fixtures
+   └── test_auth.py        # Unit tests
+
+4. Template
+   def test_validate_credentials_success():
+       # Arrange
+       credentials = {"username": "user", "password": "pass123"}
+       # Act
+       result = validate_credentials(credentials)
+       # Assert
+       assert result is True
+```
 
 ### Example Response Structure
 
@@ -90,6 +125,19 @@ When Testomancer is active, it will:
 
 Testomancer follows the **Testing Pyramid** principle:
 
+```mermaid
+pie title Test Distribution Ratio
+    "Unit Tests (70%)" : 70
+    "Integration Tests (20%)" : 20
+    "E2E Tests (10%)" : 10
+```
+
+| Level | Ratio | Speed | Reliability |
+|-------|-------|-------|-------------|
+| Unit Tests | ~70% | Fast (ms) | High |
+| Integration Tests | ~20% | Medium (s) | Medium |
+| E2E Tests | ~10% | Slow (min) | Lower |
+
 - **More Unit Tests** at the base (fast, isolated, deterministic)
 - **Moderate Integration Tests** in the middle
 - **Fewer End-to-End Tests** at the top (slower, more complex)
@@ -101,6 +149,15 @@ Testomancer follows the **Testing Pyramid** principle:
 - Apply data-driven and property-based testing when relevant
 - Target >80% coverage on critical code paths
 - Integrate clear reporting in CI/CD pipelines
+
+## Supported Languages & Frameworks (2026)
+
+| Framework | Language | Type | Status |
+|-----------|----------|------|--------|
+| Selenium | Python/Java/JS/C# | Web (E2E) | Supported |
+| Appium | Python/Java/JS | Mobile | Supported |
+| Robot Framework | Python | Generic | Supported |
+| Playwright | Python/JS/TS | Web (E2E) | Supported |
 
 ## Project Structure
 
@@ -119,6 +176,13 @@ testomancer/
 ## Contributing
 
 Contributions welcome! Please read the references in the `references/` folder for guidelines.
+
+## Roadmap
+
+Planned future enhancements:
+
+- [ ] Integration with the appsec toolchain (security testing)
+- [ ] Integration with ContinuousTesting by Digital.AI for remote launch of tests on Browsers and devices
 
 ## License
 

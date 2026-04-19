@@ -1,7 +1,29 @@
 # Best Practices Compliance Checks – Testomancer
 
+> **External Standards:** This file aligns with [ISTQB](https://www.istqb.org/) testing best practices and the [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/) for security-related tests.
+
 Before recommending tests, audit the codebase against modern language-specific standards (2026).
 Highlight violations with examples and suggest fixes.
+Overarching Principle: Follow Karpathy Guidelines for all test code suggestions.
+
+---
+
+## Cross-Language Best Practices (All Languages)
+
+| Principle | Description | Reference |
+|-----------|-------------|-----------|
+| **DRY** | Don't Repeat Yourself – shared test utilities, fixtures | - |
+| **Naming** | `test_<feature>_<scenario>` or `it should <behavior>` | ISTQB |
+| **CI Reporting** | Allure, ReportPortal, or native CI reporters | - |
+| **Security in Tests** | No hardcoded secrets; use env vars or vaults | OWASP |
+| **Deterministic** | Tests must be repeatable; avoid time-based race conditions | - |
+| **Fast** | Unit tests <100ms; integration <2s | - |
+
+**Extensible Rules**
+
+> **Placeholder for user-specific rules:** Add custom rules in `references/specific_rules.md` (per-project overrides).
+
+---
 
 ## Python
 
@@ -15,6 +37,12 @@ Highlight violations with examples and suggest fixes.
 
 **Example Snippets**
 
+| Good | Bad |
+|------|-----|
+| `class UserCreate(BaseModel)` typed | `data: dict` plain dict |
+| `def create_user(data: UserCreate) -> User` | `def create_user(data)` no hints |
+| `from mymodule import DB` injected | Global `db = connect()` |
+
 **Good Practice (Recommended):**
 ```python
 from pydantic import BaseModel
@@ -25,8 +53,8 @@ class UserCreate(BaseModel):
     password: str
     username: Optional[str] = None
 
-def create_user(user_data: UserCreate) -> User:
-    # Clear, typed, no global state
+def create_user(user_data: UserCreate, db: Database) -> User:
+    # Clear, typed, dependency injected
     ...
 ```
 
@@ -53,6 +81,13 @@ def create_user(data):  # Missing type hints
 - Follow React Hooks rules; extract logic into custom hooks
 
 **Example Snippets**
+
+| Good | Bad |
+|------|-----|
+| `interface Props { onSubmit: (d: Data) => void }` | `Props: any` |
+| `userEvent.click()` | `fireEvent.click()` (RTL) |
+| Test user behavior | `screen.getByText('hidden')` |
+| `Vitest` | Jest (legacy) |
 
 **Good Practice:**
 ```tsx
@@ -94,6 +129,13 @@ function UserForm() {
 
 **Example Snippets**
 
+| Good | Bad |
+|------|-----|
+| `private final UserRepository repo;` constructor | `@Autowired` field injection |
+| `record UserDto(...)` immutable DTO | Plain class with setters |
+| AssertJ fluent API | `assertEquals(x, y)` Hamcrest |
+| Testcontainers | MockServer for DB |
+
 **Good Practice:**
 ```java
 @Service
@@ -134,6 +176,14 @@ public class UserService {
 
 **Example Snippets**
 
+| Good | Bad |
+|------|-----|
+| `record UserDto(string Email)` immutable | Class with properties |
+| `public async Task<T>` return | `public async void` |
+| `FluentAssertions` | `Assert` legacy |
+| Primary constructor | Field injection |
+| `WebApplicationFactory` | In-memory EF |
+
 **Good Practice:**
 ```csharp
 public record UserCreateDto(string Email, string Password);
@@ -166,6 +216,83 @@ public class UserService
 
 ---
 
+## Go
+
+**Key Best Practices**
+- Follow Go code conventions (`go fmt`, `golangci-lint`)
+- Use table-driven tests for parameterized cases
+- Prefer table-driven `t.Run` subtests
+- Use `testify` or `mock` for assertions/mocking
+- Use `httpmock` or `httptest` for HTTP testing
+- Keep test files in same package with `_test.go` suffix
+
+**Example Snippets**
+
+| Good | Bad |
+|------|-----|
+| Table-driven subtests | Single monolithic test |
+| `t.Run("case name", func(t *testing.T) {...})` | `func TestAll()` with if/else |
+| Use `assert` from testify | `t.Fatal` in test body |
+| `httptest.NewRecorder()` | Real HTTP calls to localhost |
+
+**Good Practice:**
+```go
+func TestUserService_Create(t *testing.T) {
+    tests := []struct {
+        name    string
+        input  UserCreateDto
+        want   User
+        wantErr bool
+    }{
+        {"valid", UserCreateDto{Email: "a@b.com"}, User{Email: "a@b.com"}, false},
+        {"invalid email", UserCreateDto{Email: "invalid"}, User{}, true},
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            svc := NewUserService(mockRepo)
+            got, err := svc.Create(tt.input)
+            if tt.wantErr {
+                assert.Error(t, err)
+            } else {
+                assert.NoError(t, err)
+                assert.Equal(t, tt.want.Email, got.Email)
+            }
+        })
+    }
+}
+```
+
+**Violation Example:**
+```go
+func TestUserService() {
+    // Multiple test cases in one function with if/else
+    if err := svc.Create(UserCreateDto{Email: "a@b.com"}); err != nil {
+        t.Fatal(err)
+    }
+    // Hard to read, hard to maintain
+}
+```
+
+**Fix Suggestion:** Use table-driven tests with `t.Run` for readability and parallel execution.
+
+---
+
 ## How to use this file in Testomancer
 
 When you detect a language, quote the relevant section, show a short "Good vs Bad" snippet from the codebase (if possible), and propose concrete fixes.
+
+---
+
+## Custom / Project-Specific Rules
+
+> **Placeholder:** Add per-project overrides in `references/specific_rules.md`. Examples:
+> - Specific naming conventions required by the team
+> - Custom coverage thresholds (e.g., >90% for security-critical code)
+> - Mandatory security static analysis tools
+> -特定 framework requirements
+
+**How to extend:**
+1. Create `references/specific_rules.md`
+2. Add project-specific rules with clear rationale
+3. Testomancer will automatically include these in recommendations
