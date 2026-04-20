@@ -34,6 +34,7 @@ Testomancer provides structured **testing strategy and implementation guidance**
 - **Library Suggestions** – Framework-specific recommendations (Playwright, Jest, pytest, etc.)
 - **Code Templates** – Jumpstart implementation
 - **Risk-Based Testing** – Prioritizes high-risk areas (auth, payments, data validation, PII)
+- **File Backup Protocol** – Timestamped backups before any modification (`testomancer/backup/`)
 
 ---
 
@@ -45,6 +46,7 @@ Testomancer provides structured **testing strategy and implementation guidance**
 | Test Execution Time | Faster via pyramid distribution |
 | Maintenance | Lower via simpler, surgical tests |
 | Compliance | ISTQB-aligned documentation |
+| Safety | Timestamped backups prevent data loss |
 
 ---
 
