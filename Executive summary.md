@@ -22,6 +22,7 @@ Testomancer provides structured, professional testing guidance grounded in three
 - Risk-based testing strategy and prioritization
 - Level-specific recommendations with library suggestions
 - Ready-to-use code templates and CI/CD guidance
+- File Backup Protocol — timestamped backups before any modification (`testomancer/backup/`)
 
 ## Business Impact
 
@@ -31,3 +32,30 @@ Testomancer provides structured, professional testing guidance grounded in three
 | Execution Time      | Faster via pyramid discipline         |
 | Maintenance         | Lower through simpler, surgical tests |
 | Compliance & Quality| Fully ISTQB-aligned outputs           |
+| Safety             | Timestamped backups prevent data loss   |
+
+## Roadmap (Open Source)
+
+### Core Integrations
+- Playwright-mcp, Appium-mcp, Playwright-cli, rf-mcp
+
+### Test Generation
+- Auto-generate tests from Gherkin/OpenAPI/Postman, DB schema validation
+
+### AI-Powered Maintenance
+- Auto-fix flaky tests, coverage gap detection, auto-update on code changes
+
+### Reporting & CI/CD
+- HTML/JSON reports, GitHub Actions/GitLab CI templates
+
+### Test Data
+- Synthetic data generation, fixture management, PII masking
+
+### Quality & Performance
+- Duplicate test detection, slow test identification, parallelization
+
+### Specialized Testing
+- OWASP security tests, load/performance, accessibility
+
+### Documentation
+- Auto-generate test docs, test case export, coverage reports

@@ -225,10 +225,49 @@ Contributions welcome!
 
 ## Roadmap
 
-Planned future enhancements:
+Planned future enhancements (Open Source):
 
-- [ ] Integration with the appsec toolchain (security testing)
-- [ ] Integration with ContinuousTesting by Digital.AI for remote launch of tests on Browsers and devices
+### Core Integrations
+- [ ] Integration with Playwright-mcp for web automation
+- [ ] Integration with Appium-mcp for mobile testing
+- [ ] Integration with Playwright-cli for browser interactions
+- [ ] Integration with rf-mcp for Robot Framework support
+
+### Test Generation
+- [ ] Auto-generate functional/E2E tests from test cases (normal or Gherkin)
+- [ ] Auto-generate tests from OpenAPI/Swagger specs
+- [ ] Generate tests from Postman collections
+- [ ] Database schema → data validation tests
+
+### AI-Powered Maintenance
+- [ ] Auto-fix flaky tests
+- [ ] Detect test coverage gaps
+- [ ] Auto-update tests on code changes
+
+### Reporting & CI/CD
+- [ ] HTML/JSON test reports
+- [ ] GitHub Actions / GitLab CI templates
+- [ ] Test execution analytics
+
+### Test Data
+- [ ] Synthetic data generation
+- [ ] Test fixture management
+- [ ] Data masking for PII
+
+### Quality & Performance
+- [ ] Duplicate test detection
+- [ ] Slow test identification
+- [ ] Test parallelization suggestions
+
+### Specialized Testing
+- [ ] Basic OWASP security tests
+- [ ] Load/performance test templates
+- [ ] Accessibility (a11y) test templates
+
+### Documentation
+- [ ] Auto-generate test documentation
+- [ ] Test case specification export
+- [ ] Coverage reports export
 
 ---
 
