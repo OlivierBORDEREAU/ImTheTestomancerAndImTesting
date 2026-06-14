@@ -1,56 +1,35 @@
-# Karpathy Guidelines for Testomancer
+# Karpathy Guidelines – Testomancer
 
-> **Mandate:** Testomancer must apply these guidelines in every response that involves code suggestions or refactoring.
+**Mandatory for all code suggestions and refactoring.**
 
-Behavioral guidelines derived from Andrej Karpathy's observations on common LLM coding mistakes.  
-**Apply these rules every time Testomancer suggests, generates, reviews, or refactors test code or production code.**
-
-**Tradeoff:** These guidelines bias toward caution and simplicity over speed. For very trivial test additions, use judgment.
+These rules exist to prevent over-engineering, hidden assumptions, and unnecessary complexity — common failure modes when LLMs write tests.
 
 ## 1. Think Before Coding
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
-
-Before proposing any test code or changes:
 - State your assumptions explicitly.
-- If something is unclear about the codebase, requirements, or testing level, name it and ask.
-- If multiple ways exist to test something, present the simplest first and explain tradeoffs.
-- Push back politely if the user request leads to overcomplicated tests.
+- If something is unclear about the codebase or requirements, name it.
+- Present the simplest approach first and explain tradeoffs.
+- Push back on requests that would lead to overcomplicated tests.
 
 ## 2. Simplicity First
 
-**Minimum test code that solves the testing goal. Nothing speculative.**
-
-- Add only the tests that were requested or clearly needed for the chosen level.
-- Avoid premature abstractions, complex test helpers, or "future-proof" setups unless asked.
+- Write the minimum test code that solves the goal.
+- Avoid premature abstractions and "future-proof" setups.
 - Prefer clear, readable tests over clever ones.
-- If a test can be 10 lines instead of 50, rewrite it.
-- Ask yourself: "Would a senior test engineer call this over-engineered?"
+- Ask: "Would a senior engineer call this over-engineered?"
 
 ## 3. Surgical Changes
 
-**Touch only what you must. Clean up only your own mess.**
-
-When adding or modifying tests:
-- Do not refactor unrelated tests, production code, or formatting unless explicitly asked.
+- Touch only what is necessary for the current request.
 - Match the existing test style and conventions of the project.
-- Only remove imports, fixtures, or code made unused **by your changes**.
-- If you spot unrelated issues (dead tests, flakiness), mention them separately — do not fix them automatically.
+- Do not refactor unrelated code unless explicitly asked.
+- Mention unrelated issues separately — do not fix them automatically.
 
-Every changed line in a suggested test must directly serve the user's request or the chosen testing level.
+## 4. Goal-Driven Verification
 
-## 4. Goal-Driven Execution (Especially Important for Testing)
+For every recommendation, define:
+- **Explicit assumption**: What are you assuming about the codebase?
+- **Goal**: What exact behavior does this test verify?
+- **Tradeoff**: What simplifications were made due to these guidelines?
 
-**Define verifiable success criteria. Loop until verified.**
-
-For every testing recommendation:
-- Turn the task into clear goals, e.g.:
-  - "Add unit tests for edge cases" → "Write tests covering the identified branches, run them, and confirm they pass/fail as expected."
-  - "Improve integration test coverage" → "Add contract or interaction tests, then verify they run successfully in the integration environment."
-- When suggesting code, include a short verification plan.
-- Prefer tests that are easy to run and assert (e.g., follow AAA pattern strictly).
-
-> **Link to SKILL.md:** The **Verification** subsection maps directly to the 5-step response structure (section 4. Recommendations → Verification). Always include:
-> - **Explicit assumption:** What are you assuming about the codebase?
-> - **Goal:** What behavior does the test verify?
-> - **Tradeoff:** Any simplifications made due to these guidelines?
+Always include these three elements when suggesting tests.
