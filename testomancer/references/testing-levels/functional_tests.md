@@ -1,33 +1,19 @@
-# Functional / System Tests
+# Functional testing (not a test level)
 
-**ISTQB Mapping:** System Testing (functional aspects)
+The filename is retained for compatibility. Functional testing evaluates what a test object should do and can apply at any of the five levels. A UI component check is not automatically a system test; a public API check is classified by the object and purpose, not its HTTP transport. See [test model](../test-model.md).
 
-**Goal**  
-Validate that the system behaves according to business requirements and user stories.
+## Design from behavior
 
-**When to Prioritize**
-- Business rule validation
-- User story acceptance criteria
-- Public API behavior
-- Complex workflows that span multiple components
+Map requirements or acceptance criteria to explicit oracles. Use partitions, boundaries, decision tables, and state transitions to derive successful and rejected behavior, effects, and recovery. Given/When/Then is an optional expression style, not a required framework; see [test design](../test-design.md).
 
-**Approach**
-- Map acceptance criteria to test scenarios (Given/When/Then style).
-- Focus on observable behavior, not implementation.
-- Keep scenarios short and focused on one rule or flow.
+Select the interface needed by the risk:
 
-**Recommended Tools**
+- A local rule can be checked at component level.
+- A repository/API interaction may need component integration evidence.
+- A complete product workflow may need system-level evidence.
+- A cross-system contract may need system integration evidence.
+- Business fitness and deployment readiness require acceptance criteria and the appropriate stakeholders, not merely a passing functional script.
 
-| Type              | Tools                          | Notes                              |
-|-------------------|--------------------------------|------------------------------------|
-| API Testing       | REST Assured, Supertest, httpx | Contract + behavior                |
-| UI Component      | Testing Library, Storybook     | User behavior focus                |
-| Business Rules    | Custom + domain models         | Avoid testing framework internals  |
+Prefer a lower-cost API boundary when it exposes the intended failure, but retain UI checks when rendering, interaction, accessibility, or frontend/backend wiring is the risk. State real versus doubled dependencies. Useful overlap at different levels is allowed when objectives differ; remove only redundant checks whose cost exceeds their added confidence.
 
-**Key Rules**
-- Write the minimal number of scenarios needed to cover the acceptance criteria.
-- Prefer API-level functional tests over UI when possible (faster, more stable).
-- Do not duplicate unit or integration test coverage here.
-
-**Karpathy Reminder**  
-One clear scenario that verifies a business rule is better than five overlapping scenarios.
+Use existing tools and [verification](../verification.md); functional correctness alone does not establish non-functional quality or compliance.

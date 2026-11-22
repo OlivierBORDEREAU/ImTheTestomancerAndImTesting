@@ -1,35 +1,13 @@
-# Unit / Component Tests
+# Component (unit) tests
 
-**ISTQB Mapping:** Component Testing
+See [test model](../test-model.md) for classification. Component tests exercise an identified component in isolation from the wider system. The unit may be a function, class, module, or cohesive subsystem; define it rather than requiring a mock for every collaborator.
 
-**Goal**  
-Verify individual functions, methods, or classes in complete isolation.
+Use for rules, transformations, algorithms, local state, validation, and error handling where the failure can be exposed locally. Derive partitions, boundary values, and properties from a stated contract; see [test design](../test-design.md).
 
-**When to Prioritize**
-- Complex business logic and algorithms
-- Validation rules
-- Pure functions with no external dependencies
-- Edge cases and boundary conditions
+- Keep deterministic collaborators real when they belong inside the chosen unit and do not obscure the objective.
+- Replace a collaborator deliberately to control time, randomness, network, or a failure path. Explain which behavior is simulated and not verified.
+- Assert observable output/state/events or meaningful interaction contracts, not incidental call order or private internals unless that structure is the explicit subject.
+- Parameterize related cases when it keeps their individual oracles clear. Multiple assertions can verify one coherent behavior.
+- Follow existing framework/style; use [optional stack guidance](../best_practices.md) only when needed. Do not impose coverage or line-count targets.
 
-**Recommended Stack (2026)**
-
-| Language     | Primary Framework          | Complementary Tools          |
-|--------------|----------------------------|------------------------------|
-| Python       | pytest + pytest-asyncio    | hypothesis                   |
-| TypeScript   | Vitest                     | Testing Library (React)      |
-| Java         | JUnit 5 + AssertJ          | -                            |
-| .NET         | xUnit + FluentAssertions   | -                            |
-| Go           | testing + testify          | -                            |
-
-**Key Rules**
-- One assertion per test when possible.
-- Use table-driven tests for multiple scenarios.
-- Mock only what is strictly external.
-- Define success criteria before writing the test.
-
-**Coverage Targets**
-- Critical paths: >80% statement + branch coverage
-- Edge cases: Aim for 100% on boundaries and null/invalid inputs
-
-**Karpathy Reminder**  
-Keep tests minimal. A 10-line focused test is better than a 50-line comprehensive one.
+A component test cannot establish actual database behavior or service interoperability when those boundaries are doubled. Add focused integration evidence where the risk requires it. Execute and report using [verification](../verification.md).

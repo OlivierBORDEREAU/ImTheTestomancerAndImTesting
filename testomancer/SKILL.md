@@ -1,56 +1,46 @@
 ---
 name: testomancer
-description: ISTQB-aligned testing strategy and implementation guidance for AI coding agents
-tags: [testing, istqb, quality, karpathy]
+description: Assess test suites, design risk-based cases, and implement and verify focused tests with explicit oracles and honest evidence. Use for testing strategy, coverage gaps, regression tests, and test implementation.
 ---
 
-# Testomancer – Testing Strategy Skill
+# Testomancer
 
-**Mission**  
-Help developers design and implement effective, maintainable test suites that align with ISTQB test levels while strictly following Karpathy Guidelines (simplicity, surgical changes, explicit assumptions).
+Improve confidence in observable behavior with focused, maintainable tests. This is portable guidance: no specific agent runtime, memory service, tool name, harness, reporter, or external integration is required. Use available capabilities; disclose access or execution limits rather than invent evidence.
 
-## Core Principles (Always Apply)
+## Choose the intent
 
-1. **Karpathy Guidelines** — See `references/karpathy-guidelines.md`
-2. **ISTQB Test Levels** — Map recommendations to:
-   - Unit / Component Testing
-   - Integration / Component Integration Testing
-   - Functional / System Testing
-   - End-to-End / Acceptance Testing
-3. **Testing Pyramid** — Strongly favor unit and integration tests over E2E.
-4. **Risk-Based Testing** — Prioritize authentication, payments, data validation, third-party integrations, and critical business logic.
+- **Assess**: inspect existing evidence and identify prioritized gaps; do not edit by default.
+- **Design**: derive cases, oracles, boundaries, and a runnable verification plan; label examples as proposed, not executed.
+- **Implement–verify**: make authorized, focused changes and run the relevant checks; report blockers and unverified scope.
 
-## Reference Files (Read in this order)
+Infer the intent from the request. Clarify only when ambiguity changes scope or authorization.
 
-1. `references/karpathy-guidelines.md` — Mandatory rules for all code suggestions
-2. `references/specific_rules.md` — Project-specific overrides (check first)
-3. `references/best_practices.md` — Language and cross-cutting standards
-4. Testing level references (in `references/testing-levels/`):
-   - `unit_tests.md`
-   - `integration_tests.md`
-   - `functional_tests.md`
-   - `e2e_tests.md`
+## Workflow
 
-## Required Behavior
+1. **Inspect** the request, relevant source, requirements, existing tests, manifests, runner configuration, and CI commands. Distinguish observed facts from assumptions; never invent a project API.
+2. **Establish constraints**: permitted paths/actions, active project policy, environment, data/privacy rules, budgets, and success criteria. Repository instructions and user authorization govern; bundled examples are not policy.
+3. **Identify risks and oracles**: prioritize plausible failures by impact and likelihood in this context. State the expected behavior and its authoritative basis; flag conflicting or missing requirements.
+4. **Derive cases** from equivalence partitions, boundaries, decision tables, and state transitions as relevant. Include failure paths and explicit expected outcomes, not just a list of test names.
+5. **Choose boundaries**: identify the test object, level, type, scope, real dependencies, and doubles. Use the least costly boundary that can expose the risk, adding broader evidence where integration or journeys matter.
+6. **Act within scope**: assess, design, or implement as requested. Prefer existing frameworks and conventions; avoid speculative scaffolding, unrelated refactoring, and production changes for stylistic preferences.
+7. **Verify**: run the focused checks and relevant regression checks when permitted. For a defect, demonstrate failing-before/passing-after where feasible; otherwise explain the limitation. Record exact evidence, not inferred success.
+8. **Report gaps**: distinguish proposed, executed, and blocked checks; include command, result, exit status, environment, revision, and unverified scope. State residual risks without claiming absence of defects or compliance.
 
-- Always state assumptions explicitly before making recommendations.
-- Define clear success criteria for any test suggested.
-- Prefer the simplest solution that achieves the goal.
-- Make only surgical changes — do not refactor unrelated code.
-- When suggesting tests, include:
-  - Why this level is appropriate
-  - Recommended libraries/frameworks with justification
-  - Concrete code examples or templates
-  - How to verify the tests work
+## Select references, do not load everything
 
-## Response Approach
+- Classification, five levels, scope, and pyramid: [test model](references/test-model.md).
+- Case derivation and oracles: [test design](references/test-design.md).
+- Execution evidence and regression checks: [verification](references/verification.md).
+- Optional stack guidance: [best practices](references/best_practices.md).
+- Project-policy discovery: [specific rules](references/specific_rules.md); the bundled file has no active overrides.
+- Change discipline: [Karpathy guidelines](references/karpathy-guidelines.md).
+- Boundary-specific guidance: [component](references/testing-levels/unit_tests.md), [integration](references/testing-levels/integration_tests.md), [functional](references/testing-levels/functional_tests.md), [E2E](references/testing-levels/e2e_tests.md).
+- Optional output starters: [report](assets/test-report-template.md) and [inactive policy example](assets/project-policy.example.md).
 
-When given a codebase or feature request:
+## Guardrails
 
-1. Analyze the current state (languages, frameworks, existing tests if visible).
-2. Identify high-risk areas.
-3. Recommend the appropriate testing level(s) with justification.
-4. Provide concrete, minimal examples following Karpathy Guidelines.
-5. Suggest next steps (additional levels, CI integration, etc.).
-
-**Never** generate large amounts of speculative test code. One focused, verifiable test is better than ten average ones.
+- Level, type, and scope are independent: functional is not a level; E2E is not synonymous with acceptance.
+- Do not impose suite ratios, coverage thresholds, assertions-per-test quotas, or universal runtime limits. Use measured costs, risks, and confirmed project criteria.
+- Explain what a double removes from the evidence. A mocked dependency is not a verified real integration.
+- Overlap across levels is legitimate when it exposes different failures; remove redundant cost, not useful evidence.
+- Do not install dependencies, use production data, contact external systems, or change shared infrastructure without appropriate authorization. If tools or access are unavailable, deliver a labeled design and precise blocker.

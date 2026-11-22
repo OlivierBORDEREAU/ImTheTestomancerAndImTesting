@@ -1,36 +1,19 @@
-# End-to-End Tests
+# End-to-end workflows
 
-**ISTQB Mapping:** Acceptance Testing / System Testing (user journeys)
+E2E describes scope, not a separate ISTQB level or a synonym for acceptance. Define the start/end of the journey, included systems, objective, and oracle. It can contribute to system, system-integration, or acceptance evidence; a browser is optional. See [test model](../test-model.md).
 
-**Important**  
-E2E tests are expensive. ISTQB recommends keeping them to ~5-10% of the total test suite. Use risk-based selection only.
+Select journeys whose important failure mechanisms need broad evidence: checkout wiring, onboarding persistence, cross-service reconciliation, recovery, or critical business outcomes. Use measured maintenance/runtime costs and product risks, not a fixed suite percentage or a ban on overlap with component tests.
 
-**Goal**  
-Verify complete user journeys through the full system (UI + backend + data).
+## Boundaries and fidelity
 
-**When to Prioritize (sparingly)**
-- Critical business flows (e.g., checkout, onboarding, payment)
-- High-risk user journeys
-- Visual regression on key pages
-- Regulatory or compliance flows
+List real UI/API/backend/data/service participants and every simulated service. A UI-to-database journey with a stubbed payment provider can verify local orchestration, but not actual payment-provider compatibility. Retain real/approved sandbox coverage when that integration is the risk; obtain authorization for side effects and isolate test data.
 
-**Recommended Stack (2026)**
+## Execution choices
 
-| Tool        | Strength                     | Recommendation          |
-|-------------|------------------------------|-------------------------|
-| Playwright  | Auto-wait, tracing, codegen  | **Strongly preferred**  |
-| Cypress     | Good DX, time travel         | Acceptable alternative  |
-| Selenium    | Legacy                       | Avoid for new projects  |
+- Reuse an existing browser/API runner (including Playwright, Cypress, or Selenium) instead of automatically migrating it.
+- Use stable, user-facing locators and condition-based synchronization; avoid arbitrary sleeps. Code generation is optional scaffolding that still requires reviewed oracles and cleanup.
+- Seed only necessary state, isolate identities/data, and clean up reliably. Keep diagnostic traces/screenshots only where allowed; redact sensitive data.
+- Use API setup or checks when they reduce cost without bypassing the behavior under test. Do not bypass the UI if UI behavior is the risk.
+- Visual checks need controlled rendering and reviewed baselines. Accessible locators and automated scanners are useful but do not establish accessibility conformance; add appropriate manual checks.
 
-**Key Rules**
-- Keep E2E tests to the absolute minimum needed.
-- Use Playwright codegen to bootstrap, then surgically edit.
-- Mock external services and slow dependencies when possible.
-- Prefer API-level checks over pure UI when the goal is functional.
-
-**Visual & Accessibility**
-- Use built-in Playwright accessibility queries + axe-core for WCAG checks.
-- Add visual regression only on pages where layout stability matters.
-
-**Karpathy Reminder**  
-One reliable, maintainable E2E test on a critical path is worth more than ten flaky ones.
+Report exact environment, boundaries, executed outcomes, and unverified scope using [verification](../verification.md). No automation result alone establishes acceptance, production readiness, or regulatory compliance.

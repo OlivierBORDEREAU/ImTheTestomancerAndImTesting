@@ -1,36 +1,15 @@
-# Integration Tests
+# Integration tests
 
-**ISTQB Mapping:** Component Integration Testing / System Integration Testing
+Component integration checks interactions among components; system integration checks interfaces between the system and other systems/services. Classify by object/objective; see [test model](../test-model.md).
 
-**Goal**  
-Verify interactions between modules, services, databases, and external systems.
+Narrow integration covers a limited interaction; broad integration covers more interactions or a larger workflow. Breadth is independent of process topology: a narrow test may cross a network and a broad test may run in-process.
 
-**When to Prioritize**
-- REST/GraphQL API contracts
-- Database ↔ application layer
-- Service-to-service communication
-- Cross-module workflows
-- Message queues and event handling
+## Design the boundary
 
-**Narrow vs Broad Integration**
+- Identify both ends, the actual protocol/schema, and the failure to expose: serialization, SQL, migrations, transaction/constraint behavior, authentication, ordering, timeout, retry, or idempotency.
+- Use real dependencies where their behavior is the subject and an authorized representative environment is available. Existing local fixtures, ephemeral containers, or approved sandboxes are options, not requirements.
+- Use doubles when controlled failures or unavailable services justify them. Never mock the exact interaction being claimed as verified. Describe which side is real, which is simulated, and what remains unverified.
+- For consumer/provider contracts, verify consumer expectations and provider conformance separately. A stub responding as configured alone proves neither provider correctness nor deployment compatibility.
+- Isolate data, bound waits, assert committed outcomes, and clean up resources. Avoid shared/prod systems without permission.
 
-- **Narrow**: Same process, in-memory (fast, preferred when possible)
-- **Broad**: Cross-process, real containers or external services (more realistic)
-
-**Recommended Approach (Karpathy-aligned)**
-
-| Language     | Preferred Tools                     | Notes                              |
-|--------------|-------------------------------------|------------------------------------|
-| Python       | pytest + Testcontainers             | Ephemeral, automatic cleanup       |
-| TypeScript   | Vitest + Testcontainers + MSW       | Fast startup, good DX              |
-| Java         | JUnit 5 + Testcontainers            | Ryuk for automatic cleanup         |
-| .NET         | xUnit + WebApplicationFactory       | Good for ASP.NET Core              |
-
-**Contract Testing**
-- Consider consumer-driven contract testing (Pact) for microservices.
-- Start with consumer tests, then verify on the provider side.
-
-**Key Rules**
-- Only mock what you cannot control.
-- Prefer real dependencies (via Testcontainers) over heavy mocking when practical.
-- Keep integration tests focused — one major interaction per test.
+Reuse the project's runner and lifecycle tooling. Containers add startup, platform, and cleanup requirements; report them when relevant. Broader regression checks may intentionally overlap local rules to catch wiring and persistence failures. See [verification](../verification.md) for execution evidence.

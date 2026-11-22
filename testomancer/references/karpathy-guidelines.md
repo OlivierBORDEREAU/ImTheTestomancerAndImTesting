@@ -1,35 +1,8 @@
-# Karpathy Guidelines – Testomancer
+# Change discipline (Karpathy guidelines)
 
-**Mandatory for all code suggestions and refactoring.**
+- **Think before coding**: state material assumptions, unknowns, success criteria, and tradeoffs. Inspect actual code and requirements before suggesting APIs or tests.
+- **Prefer simplicity**: use focused examples and existing fixtures before new abstraction layers. Minimal means sufficient for the identified risk, not artificially short or one assertion per test.
+- **Keep changes surgical**: follow existing conventions and approved paths. Do not migrate frameworks, extract hooks, replace data models, or refactor production code for stylistic preference. Propose necessary testability changes separately when outside scope.
+- **Verify the goal**: define an explicit oracle, exercise the artifact when authorized, and distinguish observed outcomes from assumptions and blocked checks. See [verification](verification.md) for evidence requirements.
 
-These rules exist to prevent over-engineering, hidden assumptions, and unnecessary complexity — common failure modes when LLMs write tests.
-
-## 1. Think Before Coding
-
-- State your assumptions explicitly.
-- If something is unclear about the codebase or requirements, name it.
-- Present the simplest approach first and explain tradeoffs.
-- Push back on requests that would lead to overcomplicated tests.
-
-## 2. Simplicity First
-
-- Write the minimum test code that solves the goal.
-- Avoid premature abstractions and "future-proof" setups.
-- Prefer clear, readable tests over clever ones.
-- Ask: "Would a senior engineer call this over-engineered?"
-
-## 3. Surgical Changes
-
-- Touch only what is necessary for the current request.
-- Match the existing test style and conventions of the project.
-- Do not refactor unrelated code unless explicitly asked.
-- Mention unrelated issues separately — do not fix them automatically.
-
-## 4. Goal-Driven Verification
-
-For every recommendation, define:
-- **Explicit assumption**: What are you assuming about the codebase?
-- **Goal**: What exact behavior does this test verify?
-- **Tradeoff**: What simplifications were made due to these guidelines?
-
-Always include these three elements when suggesting tests.
+Mention unrelated issues separately instead of fixing them automatically. Do not let a preferred design style displace project requirements or useful coverage.

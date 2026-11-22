@@ -1,77 +1,63 @@
 # Testomancer
 
-![Testomancer Logo](./hqut3.jpg)
+Software testing guidance for AI coding agents, distributed as an
+[Agent Skills](https://agentskills.io/specification) directory.
 
-**Software testing strategy and implementation guidance for AI agents**
+Testomancer helps an agent reason about risk, choose test boundaries, and make
+focused changes with observable verification. It does not confer testing
+expertise, certify standards compliance, or guarantee coverage or defect detection.
 
-Testomancer is a specialized skill that turns any capable AI coding agent into a senior software testing expert. It provides structured guidance on testing strategy and implementation across all ISTQB-aligned testing levels, while strictly following Karpathy Guidelines.
+## Three intents
 
-**Foundations:** Built on ISTQB testing principles combined with Karpathy agent guidelines — state assumptions clearly, define verifiable success criteria first, keep changes surgical and minimal.
+| Intent | Example request | Expected output |
+| --- | --- | --- |
+| **Assess** | “Assess the tests around this payment flow.” | Evidence-based gaps, risks, assumptions, and priorities. |
+| **Design** | “Design tests for this API change.” | Test cases, boundaries, oracles, and a justified test approach. |
+| **Implement and verify** | “Add regression tests for this bug and run them.” | Focused changes and the commands, observed results, and remaining limitations. |
 
-## What It Does
+The agent should inspect the available code and existing conventions, use
+project-specific constraints, and select references relevant to the task. Test
+levels, test types, and end-to-end scope are distinct; no fixed test-suite ratio
+or universal framework choice is prescribed. Execution depends on the tools and
+permissions available in the host harness. An unrun test is not a verified test.
 
-Testomancer helps developers design effective, maintainable test suites:
+## Install or load
 
-- Analyzes the codebase (languages, frameworks, existing tests)
-- Recommends the appropriate testing level (Unit, Integration, Functional, E2E)
-- Suggests modern libraries and frameworks with justification
-- Provides concrete, minimal code examples
-- Prioritizes high-risk areas (auth, payments, data validation, integrations)
+Copy only the complete [`testomancer/`](testomancer/) directory into the chosen
+harness's skill location. Keep `SKILL.md`, `references/`, and `assets/` together.
+Repository contributor documentation is not part of the skill installation.
 
-## Core Principles
+See [documented installation locations and verification status](docs/compatibility.md)
+for OpenCode, Claude Code, and Codex. These are documentation-based instructions,
+not claims of successful runtime testing. No harness runtime has been tested yet.
+If native skills are unavailable, use the [explicit-read fallback](integrations/generic.md).
+Inspect an existing destination first: never silently overwrite user files.
 
-Testomancer combines three frameworks:
+Persistent memory is not required.
 
-| Framework            | Contribution                                      |
-|----------------------|---------------------------------------------------|
-| **ISTQB**            | Industry-standard testing levels and terminology  |
-| **Testing Pyramid**  | 70% Unit / 20% Integration / 10% E2E              |
-| **Karpathy Guidelines** | Simplicity, surgical changes, explicit assumptions |
+## Repository map
 
-## Covered Testing Levels
+- [`testomancer/SKILL.md`](testomancer/SKILL.md): skill entry point and reference routing.
+- [`testomancer/references/`](testomancer/references/): testing model, design,
+  verification, and focused testing guidance.
+- [`testomancer/assets/`](testomancer/assets/): project-policy and report examples.
+- [`docs/compatibility.md`](docs/compatibility.md): documented paths and test status.
+- [`integrations/generic.md`](integrations/generic.md): explicit loading without native skill support.
+- `scripts/validate.py`, `tests/`, and `evals/`: repository validation and evaluation materials.
 
-| Level            | ISTQB Term                    | Focus                                      |
-|------------------|-------------------------------|--------------------------------------------|
-| Unit Tests       | Component Testing             | Individual functions and classes in isolation |
-| Integration Tests| Component Integration Testing | Interactions between modules and services     |
-| Functional Tests | System Testing (functional)   | Business requirements and user stories        |
-| E2E Tests        | Acceptance Testing            | Complete user journeys (used sparingly)       |
+## Validate a contribution
 
-## Project Structure
+From the repository root:
 
+```sh
+python3 scripts/validate.py
+python3 -m unittest discover -s tests -v
 ```
-testomancer/
-├── SKILL.md
-└── references/
-    ├── best_practices.md
-    ├── karpathy-guidelines.md
-    ├── specific_rules.md
-    └── testing-levels/
-        ├── unit_tests.md
-        ├── integration_tests.md
-        ├── functional_tests.md
-        └── e2e_tests.md
-```
 
-## Key Rules
+These checks validate repository artifacts; they do not prove agent behavior or
+harness runtime compatibility. See [contributor guidance](docs/contributing.md).
 
-- Always apply Karpathy Guidelines when suggesting tests.
-- Check `specific_rules.md` first for project-specific constraints.
-- Favor simpler, faster tests (unit + integration) over E2E.
-- Focus on high-risk areas first.
-- Keep recommendations surgical and minimal.
+## License
 
-## Installation
-
-Copy the `testomancer` folder into your agent's skills directory (works with OpenCode, Claude Code, Continue.dev, and similar tools).
-
-## Usage
-
-Ask natural questions such as:
-
-- "What's the best testing strategy for this feature?"
-- "How should I test the payment flow?"
-- "Review the testing approach for this module"
-- "Help me write integration tests for the user service"
-
-Testomancer will analyze context, recommend the right level, and provide focused, actionable guidance.
+No license has been selected. The repository owner must decide the licensing terms;
+this README does not grant a license.
